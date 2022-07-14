@@ -1,5 +1,4 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+
 function sb_seek(x,y,_weight) {
 	var _target = vect2(x, y);
 	// subtract current position from target position and constrain to max_speed
@@ -36,12 +35,10 @@ function sb_flee(x,y,_weight) {
 
 function sb_pursuit(_target_obj,_weight) {
 	if(instance_exists(_target_obj)) { // Target exists
-	    // var _time = 10; // basic
-	    var _time = vect_dist(position, _target_obj.position) / _target_obj.max_speed; // dynamic
+	    var _time = vect_dist(position, _target_obj.position) / _target_obj.max_speed; 
 	    var _target_future_pos = vect_add(_target_obj.position, vect_multr(_target_obj.velocity, _time));
     
-    
-	    // subtract current position from target position and constrain to max_speed
+		// subtract current position from target position and constrain to max_speed
 	    var _desired_velocity = vect_scaler(vect_subtract(_target_future_pos,position),max_speed);
     
 	    return (vect_multr(vect_subtract(_desired_velocity,velocity),_weight));
@@ -96,10 +93,8 @@ function sb_wander(_circle_distance,_circle_radius,wander_angle,_weight ) {
 
 function sb_avoid_collision(_avoid_obj,_see_ahead_distance,_max_avoidance_force,_weight) {
 
-	//Note that this steering behaviour will try to avoid the given object, 
-	//but in no way will it actually prevent it from moving inside said object, 
-	//for example if the weighting of other steering behaviours overpowers this one. 
-	//Please see the solid_obj variable in obj_drone_flock_grid2 if you need that functionality.
+	//Tries to avoid object, but it won't prevent it from overlapping said object 
+	//Solid_obj variable is the to avoid overlaps
 
 	//Actual XY position at end of line _see_ahead_distance length away from current position
 	var _see_ahead = vect_add(position, vect_multr(vect_norm(velocity), _see_ahead_distance));
@@ -176,7 +171,6 @@ function sb_alignment(_align_obj,_align_radius,_weight) {
 	    //Testing adding own velocity
 	    _neighbour_num++;
 	    _aligned_velocity = vect_add(_aligned_velocity, velocity);
-	    //End testing
     
 	    _aligned_velocity = vect_divr(_aligned_velocity, _neighbour_num);
 
@@ -195,7 +189,7 @@ function sb_cohesion(_sep_obj , _sep_radius, _weight) {
 
 	var _neighbour_list = collision_circle_list_sb(position[1], position[2], _sep_radius, _sep_obj, false, true);
 
-	if(_neighbour_list != noone) { // Has neighbours
+	if(_neighbour_list != noone) { 
 	    var _neighbour_num = ds_list_size(_neighbour_list);
 	    var _aligned_position = vect2(0,0);
     
@@ -210,7 +204,7 @@ function sb_cohesion(_sep_obj , _sep_radius, _weight) {
     
 	    //return aligned velocity
 	    return (vect_multr(vect_norm(vect_subtract(_aligned_position,position)),_weight));
-	} else { // No neighbours
+	} else { 
 	    return vect2(0,0);
 	}
 
@@ -312,7 +306,7 @@ function sb_cohesion_grid2(_align_radius,_sb_grid_controller,_weight) {
 function sb_separation_grid(_align_radius,_sb_grid_controller,_weight) {
 
 	//sb_separation_grid2 works a lot better. 
-	//I consider this version to be buggy but I have left it in for people to mess with.
+	//WIP
 	//Both steering behaviours use the same arguments and use similar amounts of CPU.
 	//Get total number of neighbours
 	var _neighbours = ds_grid_get_disk_sum(_sb_grid_controller.sb_grid_count,x div sb_cell_size,y div sb_cell_size,_align_radius);
@@ -370,7 +364,7 @@ function scr_grid_reset(sb_cell_size) {
 	//
 	//This script is in no way necessary to use.
 	//You can specify the cell size in cont_steering itself (default is 16x16)
-	//and everything will work. I made this mostly for demo purposes.
+	
 
 	//Create list of grids to be used
 	var grid_list;
