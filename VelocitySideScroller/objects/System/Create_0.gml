@@ -12,13 +12,15 @@ global.fullscreen = true;
 
 #macro DIR_RIGHT 1
 #macro DIR_LEFT -1
-
+/*
 //Enemy Types
 enum enemyTypes {
-	drone = oEnemy,
-	airDrone = oAirDrone,
-	turret = oTurret
+drone = oEnemy,
+airDrone = oAirDrone,
+turret = oTurret
 }
 
+
+*/
 
 paused_ = false;

@@ -2,7 +2,7 @@
 //Collision tiles
 //Add all tiles to the screen
 
-#macro TILE_SIZE 128
+#macro TILE_SIZE 32
 tiles = sprite_get_width(sColl) / TILE_SIZE;
 heightstoget = tiles * TILE_SIZE;
 //global.heights = [];
@@ -41,7 +41,7 @@ for (var i = 0; i <= tilesslopes; i++)
 
 
 
-#macro SEC_TILE_SIZE 64
+#macro SEC_TILE_SIZE 16
 tiles64 = sprite_get_width(s64) / SEC_TILE_SIZE;
 heightstoget64 = tiles64 * SEC_TILE_SIZE;
 //global.heights = [];

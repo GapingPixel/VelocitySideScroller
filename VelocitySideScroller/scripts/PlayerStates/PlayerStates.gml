@@ -441,14 +441,16 @@ function PlayerMoveCollideState() {
 		if (input.key_right_released) or (input.key_left_released) {
 			wallrun_lock_key_released = true;
 		}
-		if wallrun_lock_key_released and ( ( tilemap_get_at_pixel(global.tilemap,bbox_right,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap,bbox_left,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap,x,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap64,x,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap64,bbox_left,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap64,bbox_right,bbox_bottom+1) > 0 ) ) {
+		if wallrun_lock_key_released and ( ( tilemap_get_at_pixel(global.tilemap,bbox_right,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap,bbox_left,bbox_bottom+1) > 0 ) 
+			or ( tilemap_get_at_pixel(global.tilemap,x,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap64,x,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap64,bbox_left,bbox_bottom+1) > 0 ) or ( tilemap_get_at_pixel(global.tilemap64,bbox_right,bbox_bottom+1) > 0 ) ) {
+			
 			wallrun_locked = false;
 			wallrun_lock_key_released = false;
 		} 
 	}
 	
 	var _onwallalt = max( (tilemap_get_at_pixel(global.tilemap,bbox_right+1,y) > 0), (tilemap_get_at_pixel(global.tilemap,bbox_left-1,y) > 0), (tilemap_get_at_pixel(global.tilemap64,bbox_right+1,y) > 0), (tilemap_get_at_pixel(global.tilemap64,bbox_left-1,y) > 0) );
-	if _onwallalt && hop == 0 and state != PLAYERSTATE.LEDGE_GRAB and !input.key_down_held and alarm_get(3) <=0 {
+	 if _onwallalt && hop == 0 and state != PLAYERSTATE.LEDGE_GRAB and !input.key_down_held and alarm_get(3) <=0 {
 			
 			if input.key_jump or input.key_jump_pressed {
 				alarm_set(3,global.onesecond*.2);
@@ -457,7 +459,10 @@ function PlayerMoveCollideState() {
 			
 			if input.key_right and alarm_get(3) <= 0 {
 				
-				if !wallrun && vsp == 0 && (tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom)) and tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top)  and !tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top-1) and (!tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom-sprite_height*2) or !tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom+sprite_height+1) ) /*or !tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom+sprite_height+1))*/ and ( tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top) or tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top) ) { 
+				
+				/* VAULT_RIGHT
+				if !wallrun && vsp == 0 && (tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom)) and tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top+sprite_width/2)  and !tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top+sprite_width/2-1) and (!tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom-sprite_height*2) or !tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom+sprite_height+1) ) or !tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom+sprite_height+1))        
+					and ( tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top) or tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top) ) { 
 					vault_delay--;
 					if vault_delay <= 0 and tilemap_get_at_pixel(global.tilemap,bbox_right+2,bbox_top) == 1 {
 						y -= (sprite_height/2);
@@ -469,8 +474,8 @@ function PlayerMoveCollideState() {
 							hop_dir = 1;//show_message("boas")
 							if alarm_get(2) == -1 then alarm_set(2,global.onesecond*.15);
 						}
-						vault_delay = 2;
-					}			
+						vault_delay = 2; 
+					}			*/
 					
 				} else if (wallrun and !wallrun_locked) or (!wallrun_locked and tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom) and tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top-sprite_height/2) ) {
 					if !wallrun then alarm_set(1,global.onesecond*.65);
@@ -512,8 +517,11 @@ function PlayerMoveCollideState() {
 						}
 					} 
 				}
-			} else if input.key_left and alarm_get(3) <=0 {
-				if !wallrun && vsp == 0 and (tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom)) and tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top) and !tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top-1) and (!tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom-sprite_height*2) or !tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom+sprite_height+1)) and ( tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top) or tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top) ) {//and ( tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom-(sprite_height/2)) or tilemap_get_at_pixel(global.tilemap64,bbox_left-1,bbox_bottom-(sprite_height/2)) ) {
+			}    ///CALCULOS A LA IZQUIERDA_   
+			else if input.key_left and alarm_get(3) <=0 {
+			 ///VAULT_CALCULOS A LA IZQUIERDA.
+			
+			if !wallrun && vsp == 0 and (tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom)) and tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top) and !tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top-1) and (!tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_bottom-sprite_height*2) or !tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom+sprite_height+1)) and ( tilemap_get_at_pixel(global.tilemap,bbox_right+1,bbox_top) or tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top) ) {//and ( tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom-(sprite_height/2)) or tilemap_get_at_pixel(global.tilemap64,bbox_left-1,bbox_bottom-(sprite_height/2)) ) {
 					vault_delay--;//x-=1;
 					if vault_delay <= 0 and tilemap_get_at_pixel(global.tilemap,bbox_left-2,bbox_top) == 1 {
 						y -= sprite_height/2;
@@ -525,8 +533,10 @@ function PlayerMoveCollideState() {
 							hop_dir = -1;
 							if alarm_get(2) == -1 then alarm_set(2,global.onesecond*.15);
 						}
-						vault_delay = 1;
-					}				
+						vault_delay = 1; 
+					} 
+					
+						
 				} else if (wallrun and !wallrun_locked) or (!wallrun_locked and tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_bottom) and tilemap_get_at_pixel(global.tilemap,bbox_left-1,bbox_top-sprite_height/2) ) {
 					
 					if !wallrun then alarm_set(1,global.onesecond*.65);
@@ -576,7 +586,7 @@ function PlayerMoveCollideState() {
 				alarm_set(3,global.onesecond*.2);
 				wallrun = false;
 			}
-	}
+} 
 	var _onwallalt = max( (tilemap_get_at_pixel(global.tilemap64,bbox_right+1,y) > 0), (tilemap_get_at_pixel(global.tilemap64,bbox_left-1,y) > 0) );
 	//(tilemap_get_at_pixel(global.tilemap64,bbox_right+1,y)) or (tilemap_get_at_pixel(global.tilemap64,bbox_left-1,y)) /*or (tilemap_get_at_pixel(global.tilemap,bbox_right+1,y)) or (tilemap_get_at_pixel(global.tilemap,bbox_left-1,y))*/ > 0;
 	if _onwallalt && hop == 0 and state != PLAYERSTATE.LEDGE_GRAB and !input.key_down_held and alarm_get(3) <=0  {
