@@ -139,10 +139,17 @@ switch menu_page {
 			draw_set_font(fMenu);
 			break;
 			
-			case 1:
-			slide_transition(TRANS_MODE.GOTO,rOne);
+			
+			case 1: ///HABITACIÓN YETI
+			slide_transition(TRANS_MODE.GOTO,rYeti);
 			draw_set_font(fMenu);
 			break;
+			
+			
+			/*case 1:
+			slide_transition(TRANS_MODE.GOTO,rOne);
+			draw_set_font(fMenu);
+			break;*/
 			
 			case 2: 
 			slide_transition(TRANS_MODE.GOTO,rTwo);
@@ -176,6 +183,7 @@ switch menu_page {
 				//menu_control = false;
 				menu_page = MENU_PAGE_MAIN;
 				room_goto(rMenu);
+				
 				
 			//instance_destroy();
 			break;

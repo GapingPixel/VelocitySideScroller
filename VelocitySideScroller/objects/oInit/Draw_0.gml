@@ -64,7 +64,7 @@ for (var i = heightstoget64-1; i >= 0; i--)
 	}
 }
 
-room_goto_next();
+room_goto(rYeti);
 /*
 {
 	draw_tilemap(tilemapid,0,0);

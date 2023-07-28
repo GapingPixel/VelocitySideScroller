@@ -1,6 +1,9 @@
 ///Execute the player's state
 
 //HP Regen
+
+
+
 var _regen_value = .025;
 hp = min(hp+_regen_value,maxhp);
 energy = min(energy+_regen_value,maxenergy);
@@ -10,10 +13,22 @@ switch (state) {
 	case PLAYERSTATE.MOVE:
 	PlayerMoveCollideState();
 	
+	////Jump_code
+ ///_Ocuppied=1;
+
+ ///sprite_index=_SprJump;
+
+
+
+
+	/////////////
+	
+	
+	
 	//Movement update for moving plats
 	var _sol = instance_nearest(x,y,oSolid);
 	if place_meeting(x,y+3,oSolid) {
-		x+= _sol.hsp*2;
+		x+= _sol.hsp*0.50; ///2
 	}
 	break;
 	
@@ -275,3 +290,6 @@ position = vect2(x,y);
 
 }
 
+
+*/
+if keyboard_check_pressed(ord("R")) {room_restart();}

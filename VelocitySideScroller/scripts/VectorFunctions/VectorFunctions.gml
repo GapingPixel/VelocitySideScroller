@@ -22,9 +22,9 @@ function vect3(x,y,z) {
 
 function vect2(x,y) {
 	var v;
-	v[0] = 2;
-	v[1] = x;
 	v[2] = y;
+	v[1] = x;
+	v[0] = 2;
 	return v;
 }
 

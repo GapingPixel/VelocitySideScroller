@@ -72,4 +72,11 @@ draw_text(x+100,y+_yoff*5,"hop state: " + string(hop));*/
 	draw_text(x+100,y+_yoff,"Bump slope " + string(bumpslope));
 	draw_text(x+100,y+_yoff*5,"State: " + string(state));
 
+*/
 
+
+var onwall = max(tilemap_get_at_pixel(global.tilemap,bbox_right+1,y),tilemap_get_at_pixel(global.tilemap64,bbox_right+1,y)) - max(tilemap_get_at_pixel(global.tilemap,bbox_left-1,y), tilemap_get_at_pixel(global.tilemap64,bbox_left-1,y) );
+
+draw_set_font(fnt_debug);
+draw_text(x,y-50,onwall)
+draw_text(x,y-30,Jump_rest)

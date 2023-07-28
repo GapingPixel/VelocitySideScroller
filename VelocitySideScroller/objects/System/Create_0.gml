@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 global.onesecond = max(room_speed,60);
-global.fullscreen = true;
+global.fullscreen = false;
 
 
 #macro ANG_RIGHT 0
